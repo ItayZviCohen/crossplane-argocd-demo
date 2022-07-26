@@ -2803,4 +2803,4 @@ appOfApps:
   source:
     path: apps
     repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
-    targetRevision: HEAD§
+    targetRevision: HEAD
