@@ -2801,6 +2801,6 @@ appOfApps:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: charts/apps
+    path: apps
     repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
     targetRevision: HEAD§
