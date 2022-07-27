@@ -15,6 +15,8 @@ spec:
   clusterResourceWhitelist:
   - group: ''
     kind: Namespace
+  - group: 'pkg.crossplane.io/v1'
+    kind: 'Provider'
   namespaceResourceBlacklist:
   - group: ''
     kind: ResourceQuota
@@ -23,8 +25,6 @@ spec:
   - group: ''
     kind: NetworkPolicy
   namespaceResourceWhitelist:
-  - group: 'pkg.crossplane.io/v1'
-    kind: 'Provider'
   orphanedResources:
     warn: false
   roles:
