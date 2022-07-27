@@ -2806,7 +2806,7 @@ appOfApps:
     targetRevision: HEAD
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       allowEmpty: true
       selfHeal: true
 
