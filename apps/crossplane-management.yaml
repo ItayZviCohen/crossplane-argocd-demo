@@ -10,7 +10,7 @@ spec:
   sourceRepos:
   - 'https://github.com/argoproj/argocd-example-apps'
   destinations:
-  - namespace: guestbook
+  - namespace: crossplane-argocd-demo
     server: https://kubernetes.default.svc
   clusterResourceWhitelist:
   - group: ''
@@ -52,5 +52,5 @@ spec:
   project: crossplane-management
   source:
     path: crossplane-management
-    repoURL: https://github.com/argoproj/argocd-example-apps
+    repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
     targetRevision: HEAD
