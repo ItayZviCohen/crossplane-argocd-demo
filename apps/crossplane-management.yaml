@@ -8,7 +8,7 @@ metadata:
 spec:
   description: Crossplane Management Project
   sourceRepos:
-  - 'https://github.com/argoproj/argocd-example-apps'
+  - 'https://github.com/ItayZviCohen/crossplane-argocd-demo'
   destinations:
   - namespace: crossplane-argocd-demo
     server: https://kubernetes.default.svc
