@@ -2804,3 +2804,9 @@ appOfApps:
     path: apps
     repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: false
+      allowEmpty: true
+      selfHeal: true
+

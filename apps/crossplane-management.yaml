@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: crossplane-management
+  namespace: crossplane-argocd-demo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Crossplane Management Project
+  sourceRepos:
+  - 'https://github.com/argoproj/argocd-example-apps'
+  destinations:
+  - namespace: guestbook
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  namespaceResourceBlacklist:
+  - group: ''
+    kind: ResourceQuota
+  - group: ''
+    kind: LimitRange
+  - group: ''
+    kind: NetworkPolicy
+  orphanedResources:
+    warn: false
+  roles:
+  - name: read-only
+    description: Read-only privileges to crossplane-management
+    policies:
+      - p, proj:crossplane-management:read-only, applications, get, crossplane-management/*, allow
+    groups:
+    - my-oidc-group
+  - name: ci-role
+    description: Sync privileges to crossplane-management
+    policies:
+    - p, proj:crossplane-management:ci-role, applications, sync, crossplane-management/*, allow
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-management
+  namespace: crossplane-argocd-demo
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: crossplane-argocd-demo
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    path: crossplane-management
+    repoURL: https://github.com/argoproj/argocd-example-apps
+    targetRevision: HEAD
