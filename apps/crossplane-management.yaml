@@ -68,5 +68,3 @@ spec:
       selfHeal: true
     syncOptions:
       - Replace=true
-  directory:
-    recurse: true

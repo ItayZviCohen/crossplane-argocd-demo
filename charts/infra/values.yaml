@@ -2804,6 +2804,8 @@ appOfApps:
     path: apps
     repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
     targetRevision: HEAD
+    directory:
+      recurse: true
   syncPolicy:
     automated:
       prune: true
@@ -2811,6 +2813,3 @@ appOfApps:
       selfHeal: true
     syncOptions:
       - Replace=true
-  directory:
-      recurse: true
-
