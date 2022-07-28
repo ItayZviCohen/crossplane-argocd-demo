@@ -2,6 +2,7 @@ apiVersion: demo.io/v1alpha1
 kind: ASGHTTP
 metadata:
   name: test-site
+  namespace: crossplane-argocd-demo
 spec:
   parameters:
     region: eu-central-1
