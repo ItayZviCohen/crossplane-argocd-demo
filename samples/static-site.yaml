@@ -1,0 +1,8 @@
+apiVersion: demo.io/v1alpha1
+kind: ASGHTTP
+metadata:
+  name: test-site
+spec:
+  parameters:
+    region: eu-central-1
+    html: '<h1>Hello World from $(hostname -f)</h1>'
