@@ -59,3 +59,14 @@ spec:
     path: crossplane-management
     repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
     targetRevision: HEAD
+  directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - Replace=true
+  directory:
+    recurse: true
