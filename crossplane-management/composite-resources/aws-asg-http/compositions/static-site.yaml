@@ -2,6 +2,8 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
   name: static-site
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   writeConnectionSecretsToNamespace: crossplane-argocd-demo
   compositeTypeRef:
