@@ -1,0 +1,32 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: asg-http
+spec:
+  group: demo.io
+  names:
+    kind: ASGHTTP
+    plural: asghttps
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  region:
+                    type: string
+                  html:
+                    type: string
+                required:
+                - region
+                - html
+            required:
+            - parameters

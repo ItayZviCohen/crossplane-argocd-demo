@@ -1,0 +1,70 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: samples
+  namespace: crossplane-argocd-demo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Crossplane Management Project
+  sourceRepos:
+  - 'https://github.com/ItayZviCohen/crossplane-argocd-demo'
+  destinations:
+  - namespace: crossplane-argocd-demo
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  - group: '*'
+    kind: '*'
+  namespaceResourceBlacklist:
+  - group: ''
+    kind: ResourceQuota
+  - group: ''
+    kind: LimitRange
+  - group: ''
+    kind: NetworkPolicy
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  orphanedResources:
+    warn: false
+  roles:
+  - name: read-only
+    description: Read-only privileges to crossplane-management
+    policies:
+      - p, proj:crossplane-management:read-only, applications, get, crossplane-management/*, allow
+    groups:
+    - my-oidc-group
+  - name: ci-role
+    description: Sync privileges to crossplane-management
+    policies:
+    - p, proj:crossplane-management:ci-role, applications, sync, crossplane-management/*, allow
+
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: samples
+  namespace: crossplane-argocd-demo
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: crossplane-argocd-demo
+    server: "https://kubernetes.default.svc"
+  project: samples
+  source:
+    path: samples
+    repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: false
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - Replace=true

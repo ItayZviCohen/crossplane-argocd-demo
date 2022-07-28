@@ -1,0 +1,35 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: static-site
+spec:
+  writeConnectionSecretsToNamespace: crossplane-argocd-demo
+  compositeTypeRef:
+    apiVersion: demo.io/v1alpha1
+    kind: ASGHTTP
+  resources:
+  - name: launch-template
+    base:
+      apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+      kind: LaunchTemplate
+      spec:
+        forProvider:
+          imageId: 'ami-0a1ee2fb28fe05df3'
+        providerConfigRef:
+          name: 'aws-main-account'
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.region
+      toFieldPath: spec.forProvider.region
+    - fromFieldPath: spec.parameters.html
+      toFieldPath: spec.forProvider.userData
+      transforms:
+      - type: string
+        string:
+          fmt: |
+            yum update -y
+            yum install -y httpd
+            systemctl start httpd
+            systemctl enable httpd
+            echo "%s" > /var/www/html/index.html
+
