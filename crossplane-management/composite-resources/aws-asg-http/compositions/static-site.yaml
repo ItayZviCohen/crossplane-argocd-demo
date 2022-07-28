@@ -32,4 +32,7 @@ spec:
             systemctl start httpd
             systemctl enable httpd
             echo "%s" > /var/www/html/index.html
-
+      - type: string
+        string:
+          type: Convert
+          convert: ToBase64
