@@ -20,6 +20,12 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - formFieldPath: spec.parameters.name
+    - toFieldPath: metadata.name
+      transforms:
+      - type: string
+        string:
+          fmt: "%s-launch-template"
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.region
       toFieldPath: spec.forProvider.region
