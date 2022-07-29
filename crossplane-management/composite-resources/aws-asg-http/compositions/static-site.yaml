@@ -20,8 +20,8 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
-    - formFieldPath: spec.parameters.name
-    - toFieldPath: metadata.name
+    - fromFieldPath: metadata.name
+      toFieldPath: metadata.name
       transforms:
       - type: string
         string:
