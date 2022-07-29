@@ -4,5 +4,6 @@ metadata:
   name: provider-aws
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/hook: PreSync
 spec:
   package: "crossplane/provider-jet-aws:main"
