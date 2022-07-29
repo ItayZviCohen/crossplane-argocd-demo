@@ -5,6 +5,8 @@ metadata:
   namespace: crossplane-argocd-demo
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   description: Crossplane Management Project
   sourceRepos:
@@ -50,6 +52,8 @@ metadata:
   namespace: crossplane-argocd-demo
   finalizers:
   - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
     namespace: crossplane-argocd-demo
