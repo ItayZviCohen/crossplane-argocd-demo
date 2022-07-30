@@ -58,7 +58,7 @@ spec:
   destination:
     namespace: crossplane-argocd-demo
     server: "https://kubernetes.default.svc"
-  project: crossplane-management
+  project: crossplane
   source:
     path: crossplane-management
     repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
