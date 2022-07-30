@@ -15,13 +15,11 @@ spec:
   project: crossplane
   source:
     path: charts/crossplane-infra
-    chart: crossplane-infra
-    repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
+    repoURL: 'https://github.com/ItayZviCohen/crossplane-argocd-demo'
     targetRevision: HEAD
     helm:
-      releaseName: crossplane-infra
-    directory:
-      recurse: true
+      valueFiles:
+        - values.yaml
   syncPolicy:
     automated:
       prune: true
