@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: crossplane-management
+  name: crossplane
   namespace: crossplane-argocd-demo
   finalizers:
     - resources-finalizer.argocd.argoproj.io

@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-infra
+  namespace: crossplane-argocd-demo
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  destination:
+    namespace: crossplane-argocd-demo
+    server: "https://kubernetes.default.svc"
+  project: crossplane
+  source:
+    path: charts/crossplane-infra
+    chart: crossplane-infra
+    repoURL: https://github.com/ItayZviCohen/crossplane-argocd-demo
+    targetRevision: HEAD
+    helm:
+      releaseName: crossplane-infra
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+      - Replace=true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        factor: 1

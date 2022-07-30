@@ -1,0 +1,9 @@
+apiVersion: v2
+name: argocd-infra
+description: A Helm chart for a basic ArgoCD deployment with app-of-apps pattern
+type: application
+version: 0.1.0
+dependencies:
+  - name: argo-cd
+    version: "4.9.16"
+    repository: "https://argoproj.github.io/argo-helm"
