@@ -1343,29 +1343,27 @@ argo-cd:
         return hs      
 
       resource.customizations.health.pkg.crossplane.io_Provider: |
-        health_status = {}
-
-        if obj.status == nil or obj.status.conditions == nil then
-          return hs
-        end
-        
-        for i, condition in ipairs(obj.status.conditions) do
-          if condition.type == "Healthy" then
-            health_status.message = condition.message
-        
-            if condition.status == "True" then
-              health_status.status = "Healthy"
-              health_status.message = "The Provider is up-to-date."
-              return health_status
-            end
-        
-            if condition.reason == "False" then
-              health_status.status = "Degraded"
-              return health_status
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.conditions ~= nil then
+            for i, condition in ipairs(obj.status.conditions) do
+              if condition.type == "Installed" and condition.status == "False" then
+                hs.status = "Progressing"
+                hs.message = "Provider is not yet installed"
+                return hs
+              end
+              if condition.type == "Installed" and condition.status == "True" then
+                hs.status = "Healthy"
+                hs.message = "Provider has been successfully installed"
+                return hs
+              end
             end
           end
         end
-
+    
+        hs.status = "Progressing"
+        hs.message = "Waiting for Provider"
+        return hs
 
       # Enabled logs RBAC enforcement
       # Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/upgrading/2.3-2.4/#enable-logs-rbac-enforcement

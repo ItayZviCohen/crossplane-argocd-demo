@@ -26,6 +26,12 @@ spec:
       - type: string
         string:
           fmt: "%s-launch-template"
+    - fromFieldPath: metadata.name
+      toFieldPath: spec.forProvider.name
+      transforms:
+      - type: string
+        string:
+          fmt: "%s-launch-template"
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.region
       toFieldPath: spec.forProvider.region
