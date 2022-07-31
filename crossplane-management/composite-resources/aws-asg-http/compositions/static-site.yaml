@@ -5,6 +5,19 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
+  patchSets:
+  - name: region
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.region
+      toFieldPath: spec.forProvider.region
+  - name: name
+    patches:
+    - fromFieldPath: metadata.name
+      toFieldPath: metadata.name
+    - fromFieldPath: metadata.name
+      toFieldPath: spec.forProvider.name
+
   writeConnectionSecretsToNamespace: crossplane-argocd-demo
   compositeTypeRef:
     apiVersion: demo.io/v1alpha1
@@ -20,21 +33,10 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
-    - fromFieldPath: metadata.name
-      toFieldPath: metadata.name
-      transforms:
-      - type: string
-        string:
-          fmt: "%s-launch-template"
-    - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.name
-      transforms:
-      - type: string
-        string:
-          fmt: "%s-launch-template"
-    - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.region
-      toFieldPath: spec.forProvider.region
+    - type: PatchSet
+      patchSetName: region
+    - type: PatchSet
+      patchSetName: name
     - fromFieldPath: spec.parameters.html
       toFieldPath: spec.forProvider.userData
       transforms:
@@ -67,19 +69,8 @@ spec:
       transforms:
       - type: string
         string:
-          fmt: "%s-launch-template"
-    - fromFieldPath: metadata.name
-      toFieldPath: metadata.name
-      transforms:
-      - type: string
-        string:
-          fmt: "%s-asg"
-    - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.name
-      transforms:
-      - type: string
-        string:
-          fmt: "%s-asg"
-    - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.region
-      toFieldPath: spec.forProvider.region
+          fmt: "%s"
+    - type: PatchSet
+      patchSetName: region
+    - type: PatchSet
+      patchSetName: name
