@@ -65,9 +65,9 @@ spec:
     - fromFieldPath: metadata.name
       toFieldPath: spec.forProvider.launchTemplate.name
       transforms:
-      - type:
-          string:
-            fmt: "%s-launch-template"
+      - type: string
+        string:
+          fmt: "%s-launch-template"
     - fromFieldPath: metadata.name
       toFieldPath: metadata.name
       transforms:
