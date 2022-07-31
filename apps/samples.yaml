@@ -71,4 +71,4 @@ spec:
       allowEmpty: true
       selfHeal: true
     syncOptions:
-      - Replace=true
+      - Replace=false
