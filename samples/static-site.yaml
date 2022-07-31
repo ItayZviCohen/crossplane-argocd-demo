@@ -6,4 +6,5 @@ metadata:
 spec:
   parameters:
     region: eu-central-1
+    vpcId: vpc-0ffd03ddf5035d1d5
     html: '<h1>Hello World from $(hostname -f)</h1>'

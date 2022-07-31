@@ -59,6 +59,7 @@ spec:
       spec:
         forProvider:
           launchTemplate: []
+          vpcZoneIdentifier: []
           minSize: 1
           maxSize: 3
         providerConfigRef:
@@ -74,3 +75,5 @@ spec:
       patchSetName: region
     - type: PatchSet
       patchSetName: name
+    - fromFieldPath: spec.parameters.vpcId
+      toFieldPath: spec.forProvider.vpcZoneIdentifier[0]
