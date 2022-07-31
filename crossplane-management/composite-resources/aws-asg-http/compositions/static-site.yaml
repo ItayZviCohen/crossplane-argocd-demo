@@ -72,7 +72,7 @@ spec:
         string:
           fmt: "%s"
     - fromFieldPath: spec.parameters.region
-      toFieldPath: spec.forProvider.availabilityZones
+      toFieldPath: spec.forProvider.availabilityZones[0]
       transforms:
         - type: string
           string:
