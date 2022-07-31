@@ -50,20 +50,20 @@ spec:
         string:
           type: Convert
           convert: ToBase64
-  - name: target-group
+  - name: autoscaling-group
     base:
       apiVersion: autoscaling.aws.jet.crossplane.io/v1alpha2
       kind: AutoscalingGroup
       spec:
         forProvider:
-          launchTemplate: {}
+          launchTemplate: []
           minSize: 1
           maxSize: 3
         providerConfigRef:
           name: 'aws-main-account'
     patches:
     - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.launchTemplate.name
+      toFieldPath: spec.forProvider.launchTemplate[0].name
       transforms:
       - type: string
         string:
