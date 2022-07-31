@@ -52,7 +52,7 @@ spec:
           convert: ToBase64
   - name: target-group
     base:
-      apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+      apiVersion: autoscaling.aws.jet.crossplane.io/v1alpha2
       kind: AutoscalingGroup
       spec:
         forProvider:
