@@ -27,10 +27,7 @@ spec:
                     type: string
                   html:
                     type: string
-                  vpcId:
-                    type: string
                 required:
-                - vpcId
                 - region
                 - html
             required:

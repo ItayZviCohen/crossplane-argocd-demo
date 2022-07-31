@@ -71,9 +71,13 @@ spec:
       - type: string
         string:
           fmt: "%s"
+    - fromFieldPath: spec.parameters.region
+      toFieldPath: spec.forProvider.availabilityZones
+      transform:
+        - type: string
+          string:
+            fmt: "%sa"
     - type: PatchSet
       patchSetName: region
     - type: PatchSet
       patchSetName: name
-    - fromFieldPath: spec.parameters.vpcId
-      toFieldPath: spec.forProvider.vpcZoneIdentifier[0]
