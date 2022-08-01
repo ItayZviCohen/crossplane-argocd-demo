@@ -75,7 +75,7 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
-    - type: toCompositeFieldPath
+    - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
       toFieldPath: status.asgArn
     - fromFieldPath: metadata.name
@@ -107,7 +107,7 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
-    - type: toCompositeFieldPath
+    - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
       toFieldPath: status.tgArn
     - fromFieldPath: spec.parameters.vpcId
