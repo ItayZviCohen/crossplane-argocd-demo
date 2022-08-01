@@ -17,7 +17,14 @@ spec:
       toFieldPath: metadata.name
     - fromFieldPath: metadata.name
       toFieldPath: spec.forProvider.name
-
+  - name: site-label
+    patches:
+    - fromFieldPath: metadata.name
+      toFieldPath: metadata.labels[0].site
+      transforms:
+      - type: string
+        string:
+          fmt: "%s"
   writeConnectionSecretsToNamespace: crossplane-argocd-demo
   compositeTypeRef:
     apiVersion: demo.io/v1alpha1
@@ -38,6 +45,8 @@ spec:
       patchSetName: region
     - type: PatchSet
       patchSetName: name
+    - type: PatchSet
+      patchSetName: site-label
     - fromFieldPath: spec.parameters.html
       toFieldPath: spec.forProvider.userData
       transforms:
@@ -82,3 +91,53 @@ spec:
       patchSetName: region
     - type: PatchSet
       patchSetName: name
+    - type: PatchSet
+      patchSetName: site-label
+  - name: target-group
+    base:
+      apiVersion: elbv2.aws.jet.crossplane.io/v1alpha1
+      kind: ALBTargetGroup
+      spec:
+        forProvider:
+          protocol: HTTP
+          port: 80
+        providerConfigRef:
+          name: 'aws-main-account'
+    patches:
+    - type: PatchSet
+      patchSetName: region
+    - type: PatchSet
+      patchSetName: name
+    - type: PatchSet
+      patchSetName: site-label
+  - name: target-group-attachment
+    base:
+      apiVersion: autoscaling.aws.jet.crossplane.io/v1alpha2
+      kind: Attachment
+      spec:
+        forProvider:
+          albTargetGroupArnSelector:
+            matchLabels: {}
+          autoscalingGroupNameSelector:
+            matchLabels: {}
+        providerConfigRef:
+          name: 'aws-main-account'
+    patches:
+    - type: PatchSet
+      patchSetName: region
+    - type: PatchSet
+      patchSetName: name
+    - type: PatchSet
+      patchSetName: site-label
+    - fromFieldPath: metadata.name
+      toFieldPath: spec.forProvider.albTargetGroupArnSelector.matchLabels.site
+      transforms:
+      - type: string
+        string:
+          fmt: "%s"
+    - fromFieldPath: metadata.name
+      toFieldPath: spec.forProvider.autoscalingGroupNameSelector.matchLabels.site
+      transforms:
+      - type: string
+        string:
+          fmt: "%s"
