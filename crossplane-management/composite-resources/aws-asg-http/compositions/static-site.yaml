@@ -137,15 +137,3 @@ spec:
       patchSetName: name
     - type: PatchSet
       patchSetName: site-label
-    - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.albTargetGroupArnSelector.matchLabels.site
-      transforms:
-      - type: string
-        string:
-          fmt: "%s"
-    - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.autoscalingGroupNameSelector.matchLabels.site
-      transforms:
-      - type: string
-        string:
-          fmt: "%s"
