@@ -20,7 +20,7 @@ spec:
   - name: site-label
     patches:
     - fromFieldPath: metadata.name
-      toFieldPath: metadata.labels[0].site
+      toFieldPath: metadata.labels.site
       transforms:
       - type: string
         string:
