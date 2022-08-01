@@ -7,3 +7,4 @@ spec:
   parameters:
     region: eu-central-1
     html: '<h1>Hello World from $(hostname -f)</h1>'
+    vpcId: vpc-0ffd03ddf5035d1d5

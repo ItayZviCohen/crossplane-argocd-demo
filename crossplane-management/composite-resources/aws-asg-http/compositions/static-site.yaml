@@ -104,6 +104,8 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - fromFieldPath: spec.parameters.vpcId
+      toFieldPath: spec.forProvider.vpcId
     - type: PatchSet
       patchSetName: region
     - type: PatchSet
