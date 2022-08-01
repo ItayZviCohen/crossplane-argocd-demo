@@ -35,3 +35,12 @@ spec:
                 - html
             required:
             - parameters
+          status:
+            type: object
+            properties:
+              tgArn:
+                description: ARN for the ALB target group
+                type: string
+              asgArn:
+                description: ARN for the ASG
+                type: string

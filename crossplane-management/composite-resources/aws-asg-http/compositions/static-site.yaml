@@ -75,6 +75,9 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - type: toCompositeFieldPath
+      fromFieldPath: status.atProvider.arn
+      toFieldPath: status.asgArn
     - fromFieldPath: metadata.name
       toFieldPath: spec.forProvider.launchTemplate[0].name
       transforms:
@@ -104,6 +107,9 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - type: toCompositeFieldPath
+      fromFieldPath: status.atProvider.arn
+      toFieldPath: status.tgArn
     - fromFieldPath: spec.parameters.vpcId
       toFieldPath: spec.forProvider.vpcId
     - type: PatchSet
@@ -118,13 +124,13 @@ spec:
       kind: Attachment
       spec:
         forProvider:
-          albTargetGroupArnSelector:
-            matchLabels: {}
-          autoscalingGroupNameSelector:
-            matchLabels: {}
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - fromFieldPath: status.tgArn
+      toFieldPath: spec.forProvider.albTargetGroupArn
+    - fromFieldPath: status.asgArn
+      toFieldPath: spec.forProvider.autoscalingGroupName
     - type: PatchSet
       patchSetName: region
     - type: PatchSet
