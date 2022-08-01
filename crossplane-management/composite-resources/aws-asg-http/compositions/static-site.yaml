@@ -95,8 +95,8 @@ spec:
       patchSetName: site-label
   - name: target-group
     base:
-      apiVersion: elbv2.aws.jet.crossplane.io/v1alpha1
-      kind: ALBTargetGroup
+      apiVersion: elbv2.aws.jet.crossplane.io/v1alpha2
+      kind: LBTargetGroup
       spec:
         forProvider:
           protocol: HTTP
