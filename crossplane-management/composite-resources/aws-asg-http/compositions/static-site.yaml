@@ -123,7 +123,7 @@ spec:
       apiVersion: autoscaling.aws.jet.crossplane.io/v1alpha2
       kind: Attachment
       spec:
-        forProvider:
+        forProvider: {}
         providerConfigRef:
           name: 'aws-main-account'
     patches:
