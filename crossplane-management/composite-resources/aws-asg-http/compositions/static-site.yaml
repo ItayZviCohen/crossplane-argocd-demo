@@ -137,3 +137,48 @@ spec:
       patchSetName: name
     - type: PatchSet
       patchSetName: site-label
+  - name: alb-security-group
+    base:
+      apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+      kind: SecurityGroup
+      spec:
+        forProvider:
+          ingress:
+            - protocol: HTTP
+              toPort: 80
+              cidrBlocks: '0.0.0.0/0'
+              ipv6CidrBlocks: '::/0'
+        providerConfigRef:
+          name: 'aws-main-account'
+    patches:
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.id
+      toFieldPath: status.albSgId
+    - type: PatchSet
+      patchSetName: region
+    - type: PatchSet
+      patchSetName: name
+    - type: PatchSet
+      patchSetName: site-label
+  - name: alb
+    base:
+      apiVersion: elbv2.aws.jet.crossplane.io/v1alpha2
+      kind: LB
+      spec:
+        forProvider:
+          enableDeletionProtection: false
+          securityGroups: []
+        providerConfigRef:
+          name: 'aws-main-account'
+    patches:
+    - fromFieldPath: status.albSgId
+      toFieldPath: spec.forProvider.securityGroups[0]
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.id
+      toFieldPath: status.albSgId
+    - type: PatchSet
+      patchSetName: region
+    - type: PatchSet
+      patchSetName: name
+    - type: PatchSet
+      patchSetName: site-label
