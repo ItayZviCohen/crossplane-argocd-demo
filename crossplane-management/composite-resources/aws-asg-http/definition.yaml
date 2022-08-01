@@ -41,6 +41,6 @@ spec:
               tgArn:
                 description: ARN for the ALB target group
                 type: string
-              asgArn:
-                description: ARN for the ASG
+              asgName:
+                description: Name of the ASG
                 type: string

@@ -76,8 +76,8 @@ spec:
           name: 'aws-main-account'
     patches:
     - type: ToCompositeFieldPath
-      fromFieldPath: status.atProvider.arn
-      toFieldPath: status.asgArn
+      fromFieldPath: status.atProvider.id
+      toFieldPath: status.asgName
     - fromFieldPath: metadata.name
       toFieldPath: spec.forProvider.launchTemplate[0].name
       transforms:
@@ -129,7 +129,7 @@ spec:
     patches:
     - fromFieldPath: status.tgArn
       toFieldPath: spec.forProvider.albTargetGroupArn
-    - fromFieldPath: status.asgArn
+    - fromFieldPath: status.asgName
       toFieldPath: spec.forProvider.autoscalingGroupName
     - type: PatchSet
       patchSetName: region
