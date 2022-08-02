@@ -29,7 +29,10 @@ spec:
                     type: string
                   vpcId:
                     type: string
+                  lbSubnets:
+                    type: string
                 required:
+                - lbSubnets
                 - vpcId
                 - region
                 - html

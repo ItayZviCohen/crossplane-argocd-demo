@@ -171,6 +171,8 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - fromFieldPath: spec.parameters.lbSubnets
+      toFieldPath: spec.forProvider.subnets
     - fromFieldPath: status.albSgId
       toFieldPath: spec.forProvider.securityGroups[0]
     - type: ToCompositeFieldPath

@@ -8,3 +8,4 @@ spec:
     region: eu-central-1
     html: '<h1>Hello World from $(hostname -f)</h1>'
     vpcId: vpc-0ffd03ddf5035d1d5
+    lbSubnets: ["subnet-07cbf4bbd75dfea44","subnet-005908b46ccf7431b","subnet-0a334226d7f37cf4d"]
