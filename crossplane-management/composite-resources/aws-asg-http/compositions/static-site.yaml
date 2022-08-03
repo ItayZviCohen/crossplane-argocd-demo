@@ -177,6 +177,9 @@ spec:
       toFieldPath: spec.forProvider.subnets
     - fromFieldPath: status.lbSgId
       toFieldPath: spec.forProvider.securityGroups[0]
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.id
+      toFieldPath: status.albSgId
     - type: PatchSet
       patchSetName: region
     - type: PatchSet
