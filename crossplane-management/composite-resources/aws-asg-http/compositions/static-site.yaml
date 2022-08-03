@@ -168,6 +168,8 @@ spec:
         forProvider:
           enableDeletionProtection: false
           securityGroups: []
+          accessLogs:
+            enabled: false
         providerConfigRef:
           name: 'aws-main-account'
     patches:
