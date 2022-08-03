@@ -49,6 +49,6 @@ spec:
               asgName:
                 description: Name of the ASG
                 type: string
-              lbSgId:
+              albSgId:
                 description: ID of the ALB' security group
                 type: string
