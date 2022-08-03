@@ -16,7 +16,7 @@ spec:
     - fromFieldPath: metadata.name
       toFieldPath: metadata.name
     - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.name
+      toFieldPath: spec.forProvider.tags.Name
   - name: site-label
     patches:
     - fromFieldPath: metadata.name
@@ -41,6 +41,9 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.id
+      toFieldPath: status.launchTemplateId
     - type: PatchSet
       patchSetName: region
     - type: PatchSet
@@ -75,15 +78,11 @@ spec:
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - fromFieldPath: status.launchTemplateId
+      toFieldPath: spec.forProvider.launchTemplate[0].name
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.id
       toFieldPath: status.asgName
-    - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.launchTemplate[0].name
-      transforms:
-      - type: string
-        string:
-          fmt: "%s"
     - fromFieldPath: spec.parameters.region
       toFieldPath: spec.forProvider.availabilityZones[0]
       transforms:

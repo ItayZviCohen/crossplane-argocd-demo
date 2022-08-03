@@ -52,3 +52,6 @@ spec:
               albSgId:
                 description: ID of the ALB' security group
                 type: string
+              launchTemplateId:
+                description: ID for EC2 launch templates
+                type: string
