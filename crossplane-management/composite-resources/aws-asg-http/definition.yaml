@@ -30,7 +30,9 @@ spec:
                   vpcId:
                     type: string
                   lbSubnets:
-                    type: string
+                    type: array
+                    items:
+                      type: string
                 required:
                 - lbSubnets
                 - vpcId
