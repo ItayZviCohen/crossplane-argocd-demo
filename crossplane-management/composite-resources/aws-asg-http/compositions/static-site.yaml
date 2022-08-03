@@ -169,7 +169,7 @@ spec:
           enableDeletionProtection: false
           securityGroups: []
           accessLogs:
-            enabled: false
+          - enabled: false
         providerConfigRef:
           name: 'aws-main-account'
     patches:
