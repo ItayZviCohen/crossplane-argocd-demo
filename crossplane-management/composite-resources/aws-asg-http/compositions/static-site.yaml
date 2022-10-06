@@ -30,7 +30,7 @@ spec:
   resources:
   - name: launch-template
     base:
-      apiVersion: ec2.aws.jet.crossplane.io/v1alpha2
+      apiVersion: ec2.aws.crossplane.io/v1alpha1
       kind: LaunchTemplate
       spec:
         forProvider:
