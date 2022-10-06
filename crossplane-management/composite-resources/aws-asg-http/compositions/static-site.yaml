@@ -36,7 +36,7 @@ spec:
         forProvider:
           imageId: 'ami-0a1ee2fb28fe05df3'
           instanceType: t2.micro
-          namePrefix: null
+          namePrefix: ""
         providerConfigRef:
           name: 'aws-main-account'
     patches:
