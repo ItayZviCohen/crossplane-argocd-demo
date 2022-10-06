@@ -26,7 +26,7 @@ crossplane:
   args: {}
   
   provider:
-    packages: ["crossplane/provider-jet-aws:main", "crossplane/provider-aws:main"]
+    packages: ["crossplane/provider-jet-aws:main", "crossplane/provider-aws:master"]
   
   configuration:
     packages: []
