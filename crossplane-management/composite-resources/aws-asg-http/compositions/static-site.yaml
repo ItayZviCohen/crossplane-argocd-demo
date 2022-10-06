@@ -34,14 +34,20 @@ spec:
       kind: LaunchTemplate
       spec:
         forProvider:
-          imageId: 'ami-0a1ee2fb28fe05df3'
-          instanceType: t2.micro
-          namePrefix: ""
+          launchTemplateData: 
+            imageID: 'ami-0a1ee2fb28fe05df3'
+            instanceType: t2.micro
         providerConfigRef:
           name: 'aws-main-account'
     patches:
+    - fromFieldPath: metadata.name
+      toFieldPath: spec.forProvider.launchTemplateName
+      transforms:
+        - type: string
+          string:
+            fmt: "lt-%s"
     - type: ToCompositeFieldPath
-      fromFieldPath: status.atProvider.id
+      fromFieldPath: status.atProvider.launchTemplate.launchTemplateID
       toFieldPath: status.launchTemplateId
     - type: PatchSet
       patchSetName: region
@@ -50,7 +56,7 @@ spec:
     - type: PatchSet
       patchSetName: site-label
     - fromFieldPath: spec.parameters.html
-      toFieldPath: spec.forProvider.userData
+      toFieldPath: spec.forProvider.launchTemplateData.userData
       transforms:
       - type: string
         string:
@@ -75,7 +81,7 @@ spec:
           minSize: 1
           maxSize: 3
         providerConfigRef:
-          name: 'aws-main-account'
+          name: 'aws-main-account-jet'
     patches:
     - fromFieldPath: status.launchTemplateId
       toFieldPath: spec.forProvider.launchTemplate[0].name
@@ -103,7 +109,7 @@ spec:
           protocol: HTTP
           port: 80
         providerConfigRef:
-          name: 'aws-main-account'
+          name: 'aws-main-account-jet'
     patches:
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
@@ -123,7 +129,7 @@ spec:
       spec:
         forProvider: {}
         providerConfigRef:
-          name: 'aws-main-account'
+          name: 'aws-main-account-jet'
     patches:
     - fromFieldPath: status.tgArn
       toFieldPath: spec.forProvider.albTargetGroupArn
@@ -147,7 +153,7 @@ spec:
               cidrBlocks: '0.0.0.0/0'
               ipv6CidrBlocks: '::/0'
         providerConfigRef:
-          name: 'aws-main-account'
+          name: 'aws-main-account-jet'
     patches:
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.id
@@ -169,7 +175,7 @@ spec:
           accessLogs:
           - enabled: false
         providerConfigRef:
-          name: 'aws-main-account'
+          name: 'aws-main-account-jet'
     patches:
     - fromFieldPath: spec.parameters.lbSubnets
       toFieldPath: spec.forProvider.subnets
