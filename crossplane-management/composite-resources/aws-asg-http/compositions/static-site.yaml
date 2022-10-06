@@ -15,8 +15,6 @@ spec:
     patches:
     - fromFieldPath: metadata.name
       toFieldPath: metadata.name
-    - fromFieldPath: metadata.name
-      toFieldPath: spec.forProvider.tags.Name
   - name: site-label
     patches:
     - fromFieldPath: metadata.name
